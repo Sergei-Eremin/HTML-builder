@@ -1,3 +1,4 @@
+const { log } = require("console");
 const fs = require("fs");
 
 fs.readdir(`${__dirname}/secret-folder`, { withFileTypes: true }, (err, files)=>{
