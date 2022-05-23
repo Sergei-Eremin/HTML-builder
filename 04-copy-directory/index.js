@@ -1,10 +1,12 @@
 const fs = require('fs');
+const path = require('path');
+
 fs.readdir(__dirname, (err) => {
     if (err) throw err;
   
     // пути до изначальных папок и до скопированной папки
-    const pathToOriginalDir = `${__dirname}\\files`;
-    const pathToCopiedDir = `${__dirname}\\files-copy`;
+    const pathToOriginalDir = path.resolve(__dirname, "files");
+    const pathToCopiedDir = path.resolve(__dirname, "files-copy");
   
     // создаю папку по пути dirname/название папки
     fs.mkdir(pathToCopiedDir, (error) =>
@@ -16,8 +18,8 @@ fs.readdir(__dirname, (err) => {
   
       files.forEach((elem) => {
         // путь до элементов
-        const pathToOldFile = pathToOriginalDir + '\\' + elem;
-        const pathToNewFile = pathToCopiedDir + '\\' + elem;
+        const pathToOldFile = path.resolve(pathToOriginalDir, elem)
+        const pathToNewFile = path.resolve(pathToCopiedDir, elem)
   
         // копирование
         fs.copyFile(pathToOldFile, pathToNewFile, (error) =>
